@@ -222,18 +222,26 @@
         <li><span class="icon">🚀</span> <span class="highlight">Faster iteration</span> vibe coding style automation loop</li>
       </ul>
     </section>
-    <!-- Signup form -->
-    <form action="https://getform.io/f/bkkpdqzb" method="POST" aria-label="Early Access Registration Form">
-      <h2>✨ Join the Early Access List</h2>
-      <p>Be the first to try <span class="highlight">Antrieb.ai</span> register below and we’ll notify you when the studio is ready.</p>
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required />
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required />
-      <label for="usecase">What excites you about Antrieb.ai?</label>
-      <textarea id="usecase" name="message" rows="3"></textarea>
-      <button type="submit">Register Interest</button>
-    </form>
+  <!-- Signup form -->
+<form action="https://getform.io/f/bkkpdqzb" method="POST" aria-label="Early Access Registration Form">
+  <h2>✨ Join the Early Access List</h2>
+  <p>Be the first to try <span class="highlight">Antrieb.ai</span> — register below and we’ll notify you when the studio is ready.</p>
+  
+  <label for="name">Full Name</label>
+  <input type="text" id="name" name="name" required />
+
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="email" required />
+
+  <label for="usecase">What excites you about Antrieb.ai?</label>
+  <textarea id="usecase" name="usecase" rows="3"></textarea>
+
+  <!-- Honeypot for spam bots -->
+  <input type="hidden" name="_gotcha" style="display:none">
+
+  <button type="submit">Register Interest</button>
+</form>
+
   </main>
   <footer>
     &copy; <span id="year"></span> Antrieb.ai All rights reserved.
