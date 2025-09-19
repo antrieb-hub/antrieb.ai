@@ -114,6 +114,42 @@
     .features li .highlight {
       font-weight: 700;
     }
+    /* PRI Loop Section */
+    .pri-loop {
+      text-align: center;
+      margin: 0 auto 4.5rem;
+      max-width: 700px;
+      padding: 0 1.75rem;
+      box-sizing: border-box;
+    }
+    .pri-loop h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+    .pri-loop ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+    .pri-loop li {
+      margin: 0.75rem 0;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: left;
+      background: #fff;
+      border-left: 4px solid #E57000;
+      color: #333;
+    }
+    .pri-loop li strong {
+      color: #E57000;
+    }
     /* Form */
     form {
       background: #fff;
@@ -191,7 +227,7 @@
       color: #666;
     }
     @media (max-width: 600px) {
-      .container, .features, form {
+      .container, .features, .pri-loop, form {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
       }
@@ -208,7 +244,7 @@
     <section class="intro" aria-label="Introduction">
       <p class="hook">Tired of playbook hallucinations that mess up your clusters?</p>
       <p class="tagline">
-        <span class="highlight">Antrieb. Just prompt, run, and iterate.</span>
+        Meet <span class="highlight">Antrieb.ai</span>. <span class="highlight">Prompt, Run, Iterate.</span>
       </p>
     </section>
     <!-- Features -->
@@ -220,26 +256,35 @@
         <li><span class="icon">🚀</span> <span class="highlight">Faster iteration</span> vibe coding style automation loop</li>
       </ul>
     </section>
-  <!-- Signup form -->
-<form action="https://getform.io/f/bkkpdqzb" method="POST" aria-label="Early Access Registration Form">
-  <h2>✨ Join the Early Access List</h2>
-  <p>Be the first to try <span class="highlight">Antrieb.</span> Register below and we’ll notify you when the studio is ready.</p>
-  
-  <label for="name">Full Name</label>
-  <input type="text" id="name" name="name" required />
+    <!-- PRI Loop -->
+    <section class="pri-loop" aria-label="PRI Loop">
+      <h2>The Antrieb PRI Loop</h2>
+      <p>Automation without fear, built on three simple steps:</p>
+      <ul>
+        <li><strong>Prompt</strong> — describe what you need in plain language.</li>
+        <li><strong>Run</strong> — test it safely in your sandbox, not your cluster.</li>
+        <li><strong>Iterate</strong> — refine, retry, and improve in a seamless loop.</li>
+      </ul>
+    </section>
+    <!-- Signup form -->
+    <form action="https://getform.io/f/bkkpdqzb" method="POST" aria-label="Early Access Registration Form">
+      <h2>✨ Join the Early Access List</h2>
+      <p>Be the first to try <span class="highlight">Antrieb.ai</span> — register below and we’ll notify you when the studio is ready.</p>
+      
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
 
-  <label for="email">Email Address</label>
-  <input type="email" id="email" name="email" required />
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required />
 
-  <label for="usecase">What excites you about Antrieb.ai?</label>
-  <textarea id="usecase" name="usecase" rows="3"></textarea>
+      <label for="usecase">What excites you about Antrieb.ai?</label>
+      <textarea id="usecase" name="usecase" rows="3"></textarea>
 
-  <!-- Honeypot for spam bots -->
-  <input type="hidden" name="_gotcha" style="display:none">
+      <!-- Honeypot for spam bots -->
+      <input type="hidden" name="_gotcha" style="display:none">
 
-  <button type="submit">Register Interest</button>
-</form>
-
+      <button type="submit">Register Interest</button>
+    </form>
   </main>
   <footer>
     &copy; <span id="year"></span> Antrieb.ai All rights reserved.
