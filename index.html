@@ -286,8 +286,7 @@
       <form class="cta-form mt-95" id="signup-form" action="https://getform.io/f/bkkpdqzb" method="post" novalidate>
        
         <label>
-          <span>Email Address</span>
-          <input class="control" type="email" name="email" placeholder="" aria-invalid="false" required />
+          <input class="control" type="email" name="email" placeholder="Your email address" aria-invalid="false" required />
           <small class="hint" data-for="email"></small>
         </label>
 
@@ -327,7 +326,7 @@
     if (msg){
       hint.textContent = msg;
       hint.classList.add('is-error');
-      hint.classList.remove('is-ok');
+      hint.classList.remove('is-ok'); 
     } else {
       hint.textContent = '';
       hint.classList.remove('is-error','is-ok');
