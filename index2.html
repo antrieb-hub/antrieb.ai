@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antrieb, The Proxmox Automation Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Body & Background */
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #2d2d2d;
+      background: linear-gradient(180deg, #fffaf2 0%, #fffaf2 100%);
+      margin: 0;
+      line-height: 1.6;
+      padding: 0;
+      min-height: 100vh;
+    }
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #E57000, #ffb366);
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #fff;
+      margin-bottom: 4.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      font-weight: 800;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+    /* Main container */
+    .container {
+      max-width: 700px;
+      margin: 0 auto 4.5rem;
+      padding: 0 1.25rem;
+      box-sizing: border-box;
+    }
+    /* Intro Section */
+    .intro {
+      background: #fff;
+      padding: 2rem 2rem 2rem 1.75rem;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 4.5rem;
+      border-left: 4px solid #E57000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      box-sizing: border-box;
+    }
+    .intro .hook {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #1a1a1a;
+      margin: 0 0 0.8rem 0;
+    }
+    .intro .tagline {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #2d2d2d;
+      margin: 0;
+    }
+    .highlight {
+      color: #E57000;
+      background: none;
+    }
+    .muted {
+      font-style: italic;
+      color: #555;
+    }
+    /* Features Section */
+    .features {
+      text-align: center;
+      margin: 0 auto 4.5rem;
+      max-width: 700px;
+      padding: 0 1.75rem;
+      box-sizing: border-box;
+    }
+    .features h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+    .features ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+    .features li {
+      margin: 0.75rem 0;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: left;
+      background: #fff;
+      border-left: 4px solid #E57000;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .features li .icon {
+      font-size: 1.3rem;
+    }
+    .features li .highlight {
+      font-weight: 700;
+    }
+    /* PRI Loop Section */
+    .pri-loop {
+      text-align: center;
+      margin: 0 auto 4.5rem;
+      max-width: 700px;
+      padding: 0 1.75rem;
+      box-sizing: border-box;
+    }
+    .pri-loop h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+    .pri-loop ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+    .pri-loop li {
+      margin: 0.75rem 0;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: left;
+      background: #fff;
+      border-left: 4px solid #E57000;
+      color: #333;
+    }
+    .pri-loop li strong {
+      color: #E57000;
+    }
+    /* PRI Diagram */
+    .pri-diagram {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    .pri-step {
+      text-align: center;
+    }
+    .circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E57000, #ff944d);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 0 auto 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .arrow {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #E57000;
+    }
+    /* Form */
+    form {
+      background: #fff;
+      padding: 2rem 2rem 2rem 1.75rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+      border-top: 3px solid #E57000;
+      text-align: center;
+      box-sizing: border-box;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 1.75rem;
+      padding-right: 1.75rem;
+    }
+    form h2 {
+      margin-top: 0;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      color: #1a1a1a;
+    }
+    form p {
+      margin-bottom: 1.5rem;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+    form label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+    form input, form textarea {
+      display: block;
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: #E57000;
+      box-shadow: 0 0 0 2px rgba(229,112,0,0.2);
+    }
+    form button {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #E57000, #ff944d);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s, opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+    form button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    @media (max-width: 600px) {
+      .container, .features, .pri-loop, form {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Antrieb.ai</h1>
+    <p>Your Proxmox Automation Studio : Prompt, Run, Iterate.</p>
+  </header>
+  <main class="container" role="main">
+    <!-- Intro text -->
+    <section class="intro" aria-label="Introduction">
+      <p class="hook">Playbook hallucinations ruining your clusters?</p>
+      <p class="tagline">
+         <span class="highlight">Antrieb. Prompt, Run, Iterate.</span>
+      </p>
+    </section>
+    <!-- Features -->
+    <section class="features" aria-label="Features">
+      <h2>Why Antrieb.ai?</h2>
+      <ul>
+        <li><span class="icon">🛡️</span> <span class="highlight">Safe sandbox</span> test without breaking your cluster</li>
+        <li><span class="icon">⚡</span> <span class="highlight">Zero setup</span> skip the messy configs</li>
+        <li><span class="icon">🚀</span> <span class="highlight">Faster iteration</span> vibe coding style automation loop</li>
+      </ul>
+    </section>
+    <!-- PRI Loop -->
+    <section class="pri-loop" aria-label="PRI Loop">
+      <h2>The Antrieb PRI Loop</h2>
+      <p>Automation without fear, built on three simple steps:</p>
+      <!-- Diagram -->
+      <div class="pri-diagram">
+        <div class="pri-step">
+          <div class="circle">P</div>
+          <p>Prompt</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="pri-step">
+          <div class="circle">R</div>
+          <p>Run</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="pri-step">
+          <div class="circle">I</div>
+          <p>Iterate</p>
+        </div>
+        <div class="arrow">↺</div>
+      </div>
+      <!-- Text version -->
+      <ul>
+        <li><strong>Prompt</strong> : describe what you need in plain language.</li>
+        <li><strong>Run</strong> : test it safely in your Antrieb sandbox, not your cluster.</li>
+        <li><strong>Iterate</strong> : refine, retry, and improve in a seamless loop.</li>
+      </ul>
+    </section>
+    <!-- Signup form -->
+    <form action="https://getform.io/f/bkkpdqzb" method="POST" aria-label="Early Access Registration Form">
+      <h2>✨ Join the Early Access List</h2>
+      <p>Be the first to try <span class="highlight">Antrieb.</span> Register and we’ll notify you when the studio is ready.</p>
+      
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="usecase">What excites you about Antrieb.ai?</label>
+      <textarea id="usecase" name="usecase" rows="3"></textarea>
+
+      <!-- Honeypot for spam bots -->
+      <input type="hidden" name="_gotcha" style="display:none">
+
+      <button type="submit">Register Interest</button>
+    </form>
+  </main>
+  <footer>
+    &copy; <span id="year"></span> Antrieb.ai All rights reserved.
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
