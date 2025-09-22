@@ -1,10 +1,11 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Proxmox Automation Studio</title>
+  <title>Antrieb.ai</title>
 
   <!-- Only Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -52,6 +53,7 @@
     .mb-15{margin-bottom:15px}
     .mb-25{margin-bottom:25px}
     .mt-95{margin-top:95px}
+    .mt-105{margin-top:105px}
     .mt-140{margin-top:140px}
     .mt-150{margin-top:150px}
     .pt-150{padding-top:150px}
@@ -177,15 +179,15 @@
   <section class="hero" id="hero" aria-label="Intro">
     <div class="container">
       <div class="hero__logo" aria-label="Logo 535×73">
-        <img src="logo.png" width="535" height="73" alt="Antrieb.ai logo" />
+        <h1 style="font-size: 90px">Antrieb.ai</h1>
       </div>
 
       <h1 class="hero__title mt-140">
-        Your Proxmox Automation Studio :
+        Vibe Ops for Proxmox :
         <span>Prompt, Run, Iterate.</span>
       </h1>
 
-      <button class="hero__cta mt-140" type="button" id="scroll-to-signup">
+      <button class="hero__cta mt-105" type="button" id="scroll-to-signup">
         Register Interest
       </button>
     </div>
@@ -327,69 +329,88 @@
 
     const form = document.getElementById('signup-form');
 
-    const rules = {
-      name: (v) => v.trim().length > 0 || 'Please enter your name',
-      email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Please enter a valid email'
+  const rules = {
+    name: v => v.trim().length > 0 || 'Please enter your name',
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Please enter a valid email'
+  };
 
-    };
+  function setHint(input, msg){
+    const hint = input.parentElement.querySelector('.hint[data-for="'+input.name+'"]');
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    if (!hint) return;
+    if (msg){
+      hint.textContent = msg;
+      hint.classList.add('is-error');
+      hint.classList.remove('is-ok');
+    } else {
+      hint.textContent = '';
+      hint.classList.remove('is-error','is-ok');
+    }
+  }
 
-    function setHint(input, msg, ok=false){
-      const hint = input.parentElement.querySelector('.hint[data-for="'+input.name+'"]');
-      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-      if (!hint) return;
-      if (msg){
-        hint.textContent = msg;
-        hint.classList.add('is-error');
-        hint.classList.remove('is-ok');
-      } else {
-        hint.textContent = '';              
-        hint.classList.remove('is-error','is-ok');
-      }
+  function validateField(input){
+    const name = input.name;
+    const val = input.value || '';
+    if (!rules[name]) { setHint(input, ''); return true; }
+    const res = rules[name](val);
+    if (res !== true){ setHint(input, String(res)); return false; }
+    setHint(input, '');
+    return true;
+  }
+
+  form.addEventListener('blur', (e)=>{
+    const el = e.target;
+    if (el.classList?.contains('control')) validateField(el);
+  }, true);
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+
+    const inputs = Array.from(form.querySelectorAll('.control'));
+    const ok = inputs.map(validateField).every(Boolean);
+    if (!ok){
+      inputs.find(i => i.getAttribute('aria-invalid') === 'true')?.focus();
+      return;
     }
 
-    function validateField(input){
-      const name = input.name;
-      const val = input.value || '';
-      if (!rules[name]) { setHint(input, ''); return true; }
-      const res = rules[name](val);
-      if (res !== true){ setHint(input, String(res)); return false; }
-      setHint(input, '');
-      return true;
-    }
+    // отправка на Getform через fetch
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending...';
 
+    try{
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
 
-    form.addEventListener('blur', (e)=>{
-      const el = e.target;
-      if (el.classList?.contains('control')) validateField(el);
-    }, true);
-
-
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const inputs = Array.from(form.querySelectorAll('.control'));
-      const ok = inputs.map(validateField).every(Boolean);
-      if (!ok){
-        const first = inputs.find(i => i.getAttribute('aria-invalid') === 'true');
-        first?.focus();
-        return;
-      }
+      if (!res.ok) throw new Error('Network error');
 
       form.reset();
       inputs.forEach(i => setHint(i, ''));
 
-
       const note = document.getElementById('privacy-note');
-      if (note && !note.dataset.ok){
-        const msg = document.createElement('small');
-        msg.textContent = 'Thanks — your request has been recorded.';
-        msg.style.display = 'block';
-        msg.style.marginTop = '10px';
-        msg.style.opacity = '.9';
-        note.insertAdjacentElement('beforebegin', msg);
-        note.dataset.ok = '1';
-        setTimeout(()=>{ msg.remove(); delete note.dataset.ok; }, 3000);
-      }
-    });
+      const msg = document.createElement('small');
+      msg.textContent = 'Thanks — your request has been recorded.';
+      msg.style.display = 'block';
+      msg.style.marginTop = '10px';
+      msg.style.opacity = '.9';
+      note.insertAdjacentElement('beforebegin', msg);
+      setTimeout(()=> msg.remove(), 4000);
+    }catch(err){
+      const note = document.getElementById('privacy-note');
+      const msg = document.createElement('small');
+      msg.textContent = 'Oops, failed to send. Please try again.';
+      msg.style.display = 'block';
+      msg.style.marginTop = '10px';
+      msg.style.opacity = '.9';
+      note.insertAdjacentElement('beforebegin', msg);
+      setTimeout(()=> msg.remove(), 4000);
+    }finally{
+      btn.disabled = false; btn.textContent = originalText;
+    }
+  });
   </script>
 </body>
 </html>
